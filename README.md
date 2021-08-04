@@ -1,4 +1,4 @@
-# Bot for Whastapp Web and Tradutor with NodeJS!
+# Bot for Whastapp Web and Translate with NodeJS!
 
 Hi, to start this **bot**, run the following commands
 
@@ -27,5 +27,5 @@ open your terminal and put the follow code:
 
     node translate.js
 
->  Run the whatsapp web bot
+>  Run the Translate bot
 
