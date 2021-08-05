@@ -29,3 +29,8 @@ open your terminal and put the follow code:
 
 >  Run the Translate bot
 
+    node melhorenvio.js
+
+>  Run the Frete calculator
+
+
