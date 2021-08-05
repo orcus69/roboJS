@@ -2,11 +2,9 @@ const puppeteer = require('puppeteer');
 const readlineSync = require('readline-sync');
 
 (async ()=>{
-    const browser =  await puppeteer.launch({headless: false});
+    const browser =  await puppeteer.launch({headless: true});
     const page = await browser.newPage();
     const dest = readlineSync.question('CEP Destino: ') || '65400000';
-
-    const price = '';
 
     await page.goto(`https://melhorenvio.com.br/`);
 
@@ -16,8 +14,8 @@ const readlineSync = require('readline-sync');
     await page.type('#from', '65400000');
     await page.type('#to', dest);
 
-    await page.type('#height', '4');
-    await page.type('#weight', '0,3');
+    //await page.type('#height', '4');
+    //await page.type('#weight', '0,3');
 
     await page.evaluate( () => document.querySelector('#calculate').click('enter'));
 
@@ -26,21 +24,23 @@ const readlineSync = require('readline-sync');
     await page.waitForSelector('[class="calculator-cards-mobile"]');
     
 
-    const empresas = await page.evaluate(_ => 
-        Array.from(document.querySelectorAll("#calculator > div > div > div.calculator-cards-mobile > div > div > div > p.final-text"))
-            .map(e => e.innerText)
-        
-    );
-
-    const prices =  await page.evaluate(_=>
+    
+    const data =  await page.evaluate(_=>
         Array.from(document.querySelectorAll("#calculator > div > div > div.calculator-cards-mobile > div > div > div > p.final-price.final-text"))
-            .map(e => e.innerText)
+            .map(e => {
+                return{
+                    empresa: e.parentNode.parentNode.parentNode.childNodes[0].children[0].children[0].getAttribute('alt'),
+                    modalidade: e.parentNode.parentNode.firstElementChild.children[1].innerText,
+                    prazo: e.parentNode.parentNode.children[1].children[1].innerText,
+                    prices: e.innerText
+                 }
+            })
     );
     
-    console.log(empresas);
-    console.log(prices);
+    console.log(data);
+    //console.log(prices);
     
 
 
-    browser.close
+    browser.close()
 })();
