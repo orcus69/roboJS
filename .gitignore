@@ -38,6 +38,7 @@ build/Release
 # Dependency directories
 node_modules/
 user_data/
+instagram_data/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
