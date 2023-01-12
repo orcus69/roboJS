@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const readlineSync = require('readline-sync');
 
 (async ()=>{
-    const browser =  await puppeteer.launch({headless: true});
+    const browser =  await puppeteer.launch({headless: false});
     const page = await browser.newPage();
 
     const sl = readlineSync.question('Traduzir de: ') || 'ingles';
