@@ -7,7 +7,7 @@ app.get('/frete', async (req, res) => {
   const { dest } = req.query;
 
   try {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto('https://melhorenvio.com.br/');
     console.log('Carregando...');
